@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan - Kantin Digital</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>KANTIN DIGITAL</h1>
+            <div class="divider"></div>
+        </header>
+
+        <main class="order-page">
+            <div class="order-grid">
+                <!-- Menu Selection Section -->
+                <div class="card">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="food">Menu Makanan</button>
+                        <button class="tab-btn" data-tab="drink">Menu Minuman</button>
+                        <button class="tab-btn" data-tab="payment">Metode Pembayaran</button>
+                    </div>
+
+                    <!-- Food Menu Tab -->
+                    <div class="tab-content active" id="food-tab">
+                        <h3>MENU MAKANAN</h3>
+                        <div class="menu-items">
+                            <div class="menu-item" data-id="1" data-name="Nasi Goreng" data-price="15000">
+                                <div>
+                                    <h4>Nasi Goreng</h4>
+                                    <p>Rp 15.000</p>
+                                </div>
+                                <button class="btn btn-small add-item">Tambah</button>
+                            </div>
+                            <div class="menu-item" data-id="2" data-name="Mie Goreng" data-price="12000">
+                                <div>
+                                    <h4>Mie Goreng</h4>
+                                    <p>Rp 12.000</p>
+                                </div>
+                                <button class="btn btn-small add-item">Tambah</button>
+                            </div>
+                            <div class="menu-item" data-id="3" data-name="Ayam Geprek" data-price="10000">
+                                <div>
+                                    <h4>Ayam Geprek</h4>
+                                    <p>Rp 10.000</p>
+                                </div>
+                                <button class="btn btn-small add-item">Tambah</button>
+                            </div>
+                            <div class="menu-item" data-id="4" data-name="Sate Ayam" data-price="20000">
+                                <div>
+                                    <h4>Sate Ayam</h4>
+                                    <p>Rp 20.000</p>
+                                </div>
+                                <button class="btn btn-small add-item">Tambah</button>
+                            </div>
+                            <div class="menu-item" data-id="5" data-name="Sate Sapi" data-price="22000">
+                                <div>
+                                    <h4>Sate Sapi</h4>
+                                    <p>Rp 22.000</p>
+                                </div>
+                                <button class="btn btn-small add-item">Tambah</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drink Menu Tab -->
+                    <div class="tab-content" id="drink-tab">
+                        <h3>MENU MINUMAN</h3>
+                        <div class="menu-items">
+                            <div class="menu-item" data-id="1" data-name="Es Teh" data-price="5000">
+                                <div>
+                                    <h4>Es Teh</h4>
+                                    <p>Rp 5.000</p>
+                                </div>
+                                <button class="btn btn-small add-item">Tambah</button>
+                            </div>
+                            <div class="menu-item" data-id="2" data-name="Es Jeruk" data-price="6000">
+                                <div>
+                                    <h4>Es Jeruk</h4>
+                                    <p>Rp 6.000</p>
+                                </div>
+                                <button class="btn btn-small add-item">Tambah</button>
+                            </div>
+                            <div class="menu-item" data-id="3" data-name="Susu Coklat" data-price="8000">
+                                <div>
+                                    <h4>Susu Coklat</h4>
+                                    <p>Rp 8.000</p>
+                                </div>
+                                <button class="btn btn-small add-item">Tambah</button>
+                            </div>
+                            <div class="menu-item" data-id="4" data-name="Susu Vanilla" data-price="8000">
+                                <div>
+                                    <h4>Susu Vanilla</h4>
+                                    <p>Rp 8.000</p>
+                                </div>
+                                <button class="btn btn-small add-item">Tambah</button>
+                            </div>
+                            <div class="menu-item" data-id="5" data-name="Air Mineral" data-price="4000">
+                                <div>
+                                    <h4>Air Mineral</h4>
+                                    <p>Rp 4.000</p>
+                                </div>
+                                <button class="btn btn-small add-item">Tambah</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method Tab -->
+                    <div class="tab-content" id="payment-tab">
+                        <h3>METODE PEMBAYARAN</h3>
+                        <div class="payment-options">
+                            <div class="payment-option">
+                                <input type="radio" id="qris" name="payment" value="QRIS">
+                                <label for="qris">QRIS</label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" id="cash" name="payment" value="CASH">
+                                <label for="cash">CASH</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-navigation">
+                        <button id="prev-tab" class="btn">Sebelumnya</button>
+                        <button id="next-tab" class="btn">Selanjutnya</button>
+                    </div>
+                </div>
+
+                <!-- Order Summary Section -->
+                <div class="card">
+                    <h3>STRUK PEMESANAN</h3>
+                    <div id="order-items" class="order-items">
+                        <p class="empty-order">Belum Ada Pesanan</p>
+                    </div>
+                    <div class="order-total">
+                        <div class="total-row">
+                            <span>Total Harga:</span>
+                            <span id="total-price">Rp 0</span>
+                        </div>
+                    </div>
+                    <div class="payment-method">
+                        <span>Metode Pembayaran:</span>
+                        <span id="selected-payment">Belum Memilih Pembayaran</span>
+                    </div>
+                    <button id="confirm-order" class="btn btn-full" disabled>Konfirmasi Pesanan</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

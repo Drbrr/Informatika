@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi - Kantin Digital</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>KANTIN DIGITAL</h1>
+            <div class="divider"></div>
+        </header>
+
+        <main>
+            <div class="card confirmation-card">
+                <h2>Pesanan Dikonfirmasi</h2>
+                <div class="divider"></div>
+                
+                <div class="confirmation-details">
+                    <h3>Detail Pesanan:</h3>
+                    <div id="confirmation-items" class="confirmation-items">
+                        <!-- Order items will be inserted here by JavaScript -->
+                    </div>
+                    
+                    <div class="confirmation-total">
+                        <span>Total:</span>
+                        <span id="confirmation-total-price"></span>
+                    </div>
+                    
+                    <div class="confirmation-payment">
+                        <span>Metode Pembayaran:</span>
+                        <span id="confirmation-payment-method"></span>
+                    </div>
+                </div>
+                
+                <a href="index.html" class="btn btn-full" id="back-home">Kembali ke Beranda</a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get order data from localStorage
+            const orderItems = JSON.parse(localStorage.getItem('orderItems') || '[]');
+            const paymentMethod = localStorage.getItem('paymentMethod') || '';
+            
+            // If no order data, redirect to order page
+            if (orderItems.length === 0) {
+                window.location.href = 'order.html';
+                return;
+            }
+            
+            // Calculate total price
+            const totalPrice = orderItems.reduce((total, item) => total + parseInt(item.price), 0);
+            
+            // Display order items
+            const itemsContainer = document.getElementById('confirmation-items');
+            orderItems.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'confirmation-item';
+                itemElement.innerHTML = `
+                    <span>${item.name}</span>
+                    <span>Rp ${parseInt(item.price).toLocaleString()}</span>
+                `;
+                itemsContainer.appendChild(itemElement);
+            });
+            
+            // Display total price and payment method
+            document.getElementById('confirmation-total-price').textContent = `Rp ${totalPrice.toLocaleString()}`;
+            document.getElementById('confirmation-payment-method').textContent = paymentMethod;
+            
+            // Clear order data when returning to home
+            document.getElementById('back-home').addEventListener('click', function() {
+                localStorage.removeItem('orderItems');
+                localStorage.removeItem('paymentMethod');
+            });
+        });
+    </script>
+</body>
+</html>
