@@ -5,151 +5,380 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesan - Kantin Digital</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>KANTIN DIGITAL</h1>
-            <div class="divider"></div>
-        </header>
+    <div class="app-container">
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="navbar-brand">
+                    <i class="fas fa-utensils"></i> Kantin Digital
+                </a>
+                <div class="navbar-links">
+                    <a href="index.html">Beranda</a>
+                    <a href="#" id="show-history">Riwayat</a>
+                    <a href="#" id="cart-icon" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
 
-        <main class="order-page">
+        <main class="container">
+            <h1 class="page-title">Menu Pesanan</h1>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Cari menu...">
+                    <button id="clear-search" class="clear-search">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
             <div class="order-grid">
                 <!-- Menu Selection Section -->
-                <div class="card">
+                <div class="menu-section">
                     <div class="tabs">
-                        <button class="tab-btn active" data-tab="food">Menu Makanan</button>
-                        <button class="tab-btn" data-tab="drink">Menu Minuman</button>
-                        <button class="tab-btn" data-tab="payment">Metode Pembayaran</button>
+                        <button class="tab-btn active" data-tab="food">
+                            <i class="fas fa-hamburger"></i> Makanan
+                        </button>
+                        <button class="tab-btn" data-tab="drink">
+                            <i class="fas fa-coffee"></i> Minuman
+                        </button>
+                        <button class="tab-btn" data-tab="payment">
+                            <i class="fas fa-wallet"></i> Pembayaran
+                        </button>
                     </div>
 
                     <!-- Food Menu Tab -->
                     <div class="tab-content active" id="food-tab">
-                        <h3>MENU MAKANAN</h3>
-                        <div class="menu-items">
-                            <div class="menu-item" data-id="1" data-name="Nasi Goreng" data-price="15000">
-                                <div>
-                                    <h4>Nasi Goreng</h4>
-                                    <p>Rp 15.000</p>
+                        <div class="menu-items" id="food-items">
+                            <div class="menu-item" data-id="1" data-name="Nasi Goreng" data-price="15000" data-category="food">
+                                <div class="menu-item-image food-1"></div>
+                                <div class="menu-item-details">
+                                    <h3>Nasi Goreng</h3>
+                                    <p class="menu-item-price">Rp 15.000</p>
+                                    <p class="menu-item-description">Nasi goreng spesial dengan telur dan ayam</p>
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                        <button class="quantity-btn plus">+</button>
+                                    </div>
                                 </div>
-                                <button class="btn btn-small add-item">Tambah</button>
+                                <button class="btn btn-primary add-item">
+                                    <i class="fas fa-plus"></i> Tambah
+                                </button>
                             </div>
-                            <div class="menu-item" data-id="2" data-name="Mie Goreng" data-price="12000">
-                                <div>
-                                    <h4>Mie Goreng</h4>
-                                    <p>Rp 12.000</p>
+                            <div class="menu-item" data-id="2" data-name="Mie Goreng" data-price="12000" data-category="food">
+                                <div class="menu-item-image food-2"></div>
+                                <div class="menu-item-details">
+                                    <h3>Mie Goreng</h3>
+                                    <p class="menu-item-price">Rp 12.000</p>
+                                    <p class="menu-item-description">Mie goreng dengan telur dan sayuran</p>
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                        <button class="quantity-btn plus">+</button>
+                                    </div>
                                 </div>
-                                <button class="btn btn-small add-item">Tambah</button>
+                                <button class="btn btn-primary add-item">
+                                    <i class="fas fa-plus"></i> Tambah
+                                </button>
                             </div>
-                            <div class="menu-item" data-id="3" data-name="Ayam Geprek" data-price="10000">
-                                <div>
-                                    <h4>Ayam Geprek</h4>
-                                    <p>Rp 10.000</p>
+                            <div class="menu-item" data-id="3" data-name="Ayam Geprek" data-price="10000" data-category="food">
+                                <div class="menu-item-image food-3"></div>
+                                <div class="menu-item-details">
+                                    <h3>Ayam Geprek</h3>
+                                    <p class="menu-item-price">Rp 10.000</p>
+                                    <p class="menu-item-description">Ayam geprek pedas dengan sambal spesial</p>
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                        <button class="quantity-btn plus">+</button>
+                                    </div>
                                 </div>
-                                <button class="btn btn-small add-item">Tambah</button>
+                                <button class="btn btn-primary add-item">
+                                    <i class="fas fa-plus"></i> Tambah
+                                </button>
                             </div>
-                            <div class="menu-item" data-id="4" data-name="Sate Ayam" data-price="20000">
-                                <div>
-                                    <h4>Sate Ayam</h4>
-                                    <p>Rp 20.000</p>
+                            <div class="menu-item" data-id="4" data-name="Sate Ayam" data-price="20000" data-category="food">
+                                <div class="menu-item-image food-4"></div>
+                                <div class="menu-item-details">
+                                    <h3>Sate Ayam</h3>
+                                    <p class="menu-item-price">Rp 20.000</p>
+                                    <p class="menu-item-description">Sate ayam dengan bumbu kacang</p>
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                        <button class="quantity-btn plus">+</button>
+                                    </div>
                                 </div>
-                                <button class="btn btn-small add-item">Tambah</button>
+                                <button class="btn btn-primary add-item">
+                                    <i class="fas fa-plus"></i> Tambah
+                                </button>
                             </div>
-                            <div class="menu-item" data-id="5" data-name="Sate Sapi" data-price="22000">
-                                <div>
-                                    <h4>Sate Sapi</h4>
-                                    <p>Rp 22.000</p>
+                            <div class="menu-item" data-id="5" data-name="Sate Sapi" data-price="22000" data-category="food">
+                                <div class="menu-item-image food-5"></div>
+                                <div class="menu-item-details">
+                                    <h3>Sate Sapi</h3>
+                                    <p class="menu-item-price">Rp 22.000</p>
+                                    <p class="menu-item-description">Sate sapi dengan bumbu kacang spesial</p>
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                        <button class="quantity-btn plus">+</button>
+                                    </div>
                                 </div>
-                                <button class="btn btn-small add-item">Tambah</button>
+                                <button class="btn btn-primary add-item">
+                                    <i class="fas fa-plus"></i> Tambah
+                                </button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Drink Menu Tab -->
                     <div class="tab-content" id="drink-tab">
-                        <h3>MENU MINUMAN</h3>
-                        <div class="menu-items">
-                            <div class="menu-item" data-id="1" data-name="Es Teh" data-price="5000">
-                                <div>
-                                    <h4>Es Teh</h4>
-                                    <p>Rp 5.000</p>
+                        <div class="menu-items" id="drink-items">
+                            <div class="menu-item" data-id="1" data-name="Es Teh" data-price="5000" data-category="drink">
+                                <div class="menu-item-image drink-1"></div>
+                                <div class="menu-item-details">
+                                    <h3>Es Teh</h3>
+                                    <p class="menu-item-price">Rp 5.000</p>
+                                    <p class="menu-item-description">Es teh manis segar</p>
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                        <button class="quantity-btn plus">+</button>
+                                    </div>
                                 </div>
-                                <button class="btn btn-small add-item">Tambah</button>
+                                <button class="btn btn-primary add-item">
+                                    <i class="fas fa-plus"></i> Tambah
+                                </button>
                             </div>
-                            <div class="menu-item" data-id="2" data-name="Es Jeruk" data-price="6000">
-                                <div>
-                                    <h4>Es Jeruk</h4>
-                                    <p>Rp 6.000</p>
+                            <div class="menu-item" data-id="2" data-name="Es Jeruk" data-price="6000" data-category="drink">
+                                <div class="menu-item-image drink-2"></div>
+                                <div class="menu-item-details">
+                                    <h3>Es Jeruk</h3>
+                                    <p class="menu-item-price">Rp 6.000</p>
+                                    <p class="menu-item-description">Es jeruk segar dengan jeruk pilihan</p>
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                        <button class="quantity-btn plus">+</button>
+                                    </div>
                                 </div>
-                                <button class="btn btn-small add-item">Tambah</button>
+                                <button class="btn btn-primary add-item">
+                                    <i class="fas fa-plus"></i> Tambah
+                                </button>
                             </div>
-                            <div class="menu-item" data-id="3" data-name="Susu Coklat" data-price="8000">
-                                <div>
-                                    <h4>Susu Coklat</h4>
-                                    <p>Rp 8.000</p>
+                            <div class="menu-item" data-id="3" data-name="Susu Coklat" data-price="8000" data-category="drink">
+                                <div class="menu-item-image drink-3"></div>
+                                <div class="menu-item-details">
+                                    <h3>Susu Coklat</h3>
+                                    <p class="menu-item-price">Rp 8.000</p>
+                                    <p class="menu-item-description">Susu coklat dingin</p>
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                        <button class="quantity-btn plus">+</button>
+                                    </div>
                                 </div>
-                                <button class="btn btn-small add-item">Tambah</button>
+                                <button class="btn btn-primary add-item">
+                                    <i class="fas fa-plus"></i> Tambah
+                                </button>
                             </div>
-                            <div class="menu-item" data-id="4" data-name="Susu Vanilla" data-price="8000">
-                                <div>
-                                    <h4>Susu Vanilla</h4>
-                                    <p>Rp 8.000</p>
+                            <div class="menu-item" data-id="4" data-name="Susu Vanilla" data-price="8000" data-category="drink">
+                                <div class="menu-item-image drink-4"></div>
+                                <div class="menu-item-details">
+                                    <h3>Susu Vanilla</h3>
+                                    <p class="menu-item-price">Rp 8.000</p>
+                                    <p class="menu-item-description">Susu vanilla dingin</p>
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                        <button class="quantity-btn plus">+</button>
+                                    </div>
                                 </div>
-                                <button class="btn btn-small add-item">Tambah</button>
+                                <button class="btn btn-primary add-item">
+                                    <i class="fas fa-plus"></i> Tambah
+                                </button>
                             </div>
-                            <div class="menu-item" data-id="5" data-name="Air Mineral" data-price="4000">
-                                <div>
-                                    <h4>Air Mineral</h4>
-                                    <p>Rp 4.000</p>
+                            <div class="menu-item" data-id="5" data-name="Air Mineral" data-price="4000" data-category="drink">
+                                <div class="menu-item-image drink-5"></div>
+                                <div class="menu-item-details">
+                                    <h3>Air Mineral</h3>
+                                    <p class="menu-item-price">Rp 4.000</p>
+                                    <p class="menu-item-description">Air mineral segar</p>
+                                    <div class="quantity-control">
+                                        <button class="quantity-btn minus">-</button>
+                                        <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                        <button class="quantity-btn plus">+</button>
+                                    </div>
                                 </div>
-                                <button class="btn btn-small add-item">Tambah</button>
+                                <button class="btn btn-primary add-item">
+                                    <i class="fas fa-plus"></i> Tambah
+                                </button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Payment Method Tab -->
                     <div class="tab-content" id="payment-tab">
-                        <h3>METODE PEMBAYARAN</h3>
-                        <div class="payment-options">
-                            <div class="payment-option">
+                        <div class="payment-methods">
+                            <h3 class="section-title">Pilih Metode Pembayaran</h3>
+                            
+                            <div class="payment-option" data-payment="QRIS">
                                 <input type="radio" id="qris" name="payment" value="QRIS">
-                                <label for="qris">QRIS</label>
+                                <label for="qris">
+                                    <i class="fas fa-qrcode"></i>
+                                    <span>QRIS</span>
+                                    <p class="payment-description">Bayar dengan scan QR code</p>
+                                </label>
                             </div>
-                            <div class="payment-option">
+                            
+                            <div class="payment-option" data-payment="CASH">
                                 <input type="radio" id="cash" name="payment" value="CASH">
-                                <label for="cash">CASH</label>
+                                <label for="cash">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <span>CASH</span>
+                                    <p class="payment-description">Bayar dengan uang tunai</p>
+                                </label>
+                            </div>
+
+                            <div class="discount-section">
+                                <h3 class="section-title">Kode Promo</h3>
+                                <div class="discount-input">
+                                    <input type="text" id="discount-code" placeholder="Masukkan kode promo">
+                                    <button id="apply-discount" class="btn btn-outline">Terapkan</button>
+                                </div>
+                                <p id="discount-message" class="discount-message"></p>
                             </div>
                         </div>
                     </div>
 
                     <div class="tab-navigation">
-                        <button id="prev-tab" class="btn">Sebelumnya</button>
-                        <button id="next-tab" class="btn">Selanjutnya</button>
+                        <button id="prev-tab" class="btn btn-outline">
+                            <i class="fas fa-arrow-left"></i> Sebelumnya
+                        </button>
+                        <button id="next-tab" class="btn btn-primary">
+                            Selanjutnya <i class="fas fa-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
 
                 <!-- Order Summary Section -->
-                <div class="card">
-                    <h3>STRUK PEMESANAN</h3>
+                <div class="order-summary" id="order-summary">
+                    <div class="summary-header">
+                        <h2>Ringkasan Pesanan</h2>
+                        <button id="clear-cart" class="btn btn-text">
+                            <i class="fas fa-trash"></i> Kosongkan
+                        </button>
+                    </div>
+                    
                     <div id="order-items" class="order-items">
                         <p class="empty-order">Belum Ada Pesanan</p>
                     </div>
-                    <div class="order-total">
-                        <div class="total-row">
-                            <span>Total Harga:</span>
+                    
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">Rp 0</span>
+                        </div>
+                        <div class="summary-row" id="discount-row" style="display: none;">
+                            <span>Diskon</span>
+                            <span id="discount-amount">-Rp 0</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
                             <span id="total-price">Rp 0</span>
                         </div>
                     </div>
-                    <div class="payment-method">
+                    
+                    <div class="payment-info">
+                        <i class="fas fa-wallet"></i>
                         <span>Metode Pembayaran:</span>
-                        <span id="selected-payment">Belum Memilih Pembayaran</span>
+                        <span id="selected-payment">Belum Memilih</span>
                     </div>
-                    <button id="confirm-order" class="btn btn-full" disabled>Konfirmasi Pesanan</button>
+                    
+                    <button id="confirm-order" class="btn btn-primary btn-lg btn-full" disabled>
+                        <i class="fas fa-check-circle"></i> Konfirmasi Pesanan
+                    </button>
                 </div>
             </div>
         </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 Kantin Digital. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#" id="show-history-footer">Riwayat Pesanan</a>
+                    <a href="#">Bantuan</a>
+                    <a href="#">Kontak</a>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Mobile Cart Button -->
+    <button id="mobile-cart-btn" class="mobile-cart-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="mobile-cart-count">0</span>
+    </button>
+
+    <!-- Order History Modal -->
+    <div id="history-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Riwayat Pesanan</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body" id="history-list">
+                <!-- Order history will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Konfirmasi Pesanan</h2>
+                <span class="close-confirm">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin mengonfirmasi pesanan ini?</p>
+                <div class="modal-buttons">
+                    <button id="cancel-confirm" class="btn btn-outline">Batal</button>
+                    <button id="proceed-confirm" class="btn btn-primary">Ya, Konfirmasi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clear Cart Modal -->
+    <div id="clear-cart-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Kosongkan Keranjang</h2>
+                <span class="close-clear-cart">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin mengosongkan keranjang?</p>
+                <div class="modal-buttons">
+                    <button id="cancel-clear" class="btn btn-outline">Batal</button>
+                    <button id="proceed-clear" class="btn btn-primary">Ya, Kosongkan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="utils.js"></script>
+    <script src="order.js"></script>
 </body>
 </html>
