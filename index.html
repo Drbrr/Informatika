@@ -1,197 +1,150 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kantin Digital</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kopi Santai</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
-    <div class="app-container">
-        <header class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">KANTIN DIGITAL</h1>
-                <p class="hero-subtitle">Pesan makanan dan minuman dengan mudah</p>
-                <a href="order.html" class="btn btn-primary btn-lg">
-                    <i class="fas fa-utensils"></i> Mulai Pesan
-                </a>
-            </div>
-        </header>
-
-        <main class="container">
-            <section class="features">
-                <div class="feature-card">
-                    <i class="fas fa-hamburger feature-icon"></i>
-                    <h3>Menu Lengkap</h3>
-                    <p>Berbagai pilihan makanan dan minuman lezat</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-money-bill-wave feature-icon"></i>
-                    <h3>Pembayaran Mudah</h3>
-                    <p>Bayar dengan QRIS atau tunai</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-history feature-icon"></i>
-                    <h3>Riwayat Pesanan</h3>
-                    <p>Lihat pesanan sebelumnya dengan mudah</p>
-                </div>
-            </section>
-
-            <section class="menu-preview">
-                <h2 class="section-title">Menu Favorit</h2>
-                <div class="menu-cards">
-                    <div class="menu-card">
-                        <div class="menu-card-image food-1"></div>
-                        <div class="menu-card-content">
-                            <h3>Nasi Goreng</h3>
-                            <p class="menu-price">Rp 15.000</p>
-                            <p class="menu-description">Nasi goreng spesial dengan telur dan ayam</p>
-                            <a href="order.html" class="btn btn-outline">Pesan Sekarang</a>
-                        </div>
-                    </div>
-                    <div class="menu-card">
-                        <div class="menu-card-image food-2"></div>
-                        <div class="menu-card-content">
-                            <h3>Ayam Geprek</h3>
-                            <p class="menu-price">Rp 10.000</p>
-                            <p class="menu-description">Ayam geprek pedas dengan sambal spesial</p>
-                            <a href="order.html" class="btn btn-outline">Pesan Sekarang</a>
-                        </div>
-                    </div>
-                    <div class="menu-card">
-                        <div class="menu-card-image drink-1"></div>
-                        <div class="menu-card-content">
-                            <h3>Es Jeruk</h3>
-                            <p class="menu-price">Rp 6.000</p>
-                            <p class="menu-description">Es jeruk segar dengan jeruk pilihan</p>
-                            <a href="order.html" class="btn btn-outline">Pesan Sekarang</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <a href="order.html" class="btn btn-primary">Lihat Semua Menu</a>
-                </div>
-            </section>
-        </main>
-
-        <footer class="footer">
-            <div class="container">
-                <p>&copy; 2024 Kantin Digital. All rights reserved.</p>
-                <div class="footer-links">
-                    <a href="#" id="show-history">Riwayat Pesanan</a>
-                    <a href="#">Bantuan</a>
-                    <a href="#">Kontak</a>
-                </div>
-            </div>
-        </footer>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="img/logo.png" alt="Kopi Santai">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#about">Tentang Kami</a></li>
+          <li><a href="#contact">Kontak</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <!-- Order History Modal -->
-    <div id="history-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Riwayat Pesanan</h2>
-                <span class="close">&times;</span>
-            </div>
-            <div class="modal-body" id="history-list">
-                <!-- Order history will be populated here -->
-            </div>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Selamat Datang di Kopi Santai</h1>
+        <p>Nikmati kopi berkualitas tinggi dengan suasana yang nyaman dan santai.</p>
+        <a href="order.html" class="btn btn-primary">Pesan Sekarang</a>
+      </div>
+      <div class="hero-image">
+        <img src="img/hero-image.png" alt="Kopi Santai">
+      </div>
+    </div>
+  </section>
+
+  <section id="menu" class="menu">
+    <div class="container">
+      <h2>Menu Kami</h2>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <img src="img/menu-kopi1.jpg" alt="Espresso">
+          <h3>Espresso</h3>
+          <p>Kopi hitam pekat yang disajikan dalam ukuran kecil.</p>
+          <span class="harga">Rp 15.000</span>
+          <a href="order.html?tab=drink" class="btn btn-outline">Pesan Sekarang</a>
         </div>
+        <div class="menu-card">
+          <img src="img/menu-kopi2.jpg" alt="Latte">
+          <h3>Latte</h3>
+          <p>Espresso yang dicampur dengan susu dan lapisan busa tipis.</p>
+          <span class="harga">Rp 20.000</span>
+          <a href="order.html" class="btn btn-outline">Pesan Sekarang</a>
+        </div>
+        <div class="menu-card">
+          <img src="img/menu-kopi3.jpg" alt="Cappuccino">
+          <h3>Cappuccino</h3>
+          <p>Espresso dengan susu dan busa yang lebih tebal.</p>
+          <span class="harga">Rp 20.000</span>
+          <a href="order.html" class="btn btn-outline">Pesan Sekarang</a>
+        </div>
+        <div class="menu-card">
+          <img src="img/menu-nonkopi1.jpg" alt="Teh Tarik">
+          <h3>Teh Tarik</h3>
+          <p>Teh susu khas Malaysia yang ditarik hingga berbusa.</p>
+          <span class="harga">Rp 12.000</span>
+          <a href="order.html" class="btn btn-outline">Pesan Sekarang</a>
+        </div>
+        <div class="menu-card">
+          <img src="img/menu-nonkopi2.jpg" alt="Cokelat Panas">
+          <h3>Cokelat Panas</h3>
+          <p>Minuman cokelat hangat yang cocok untuk segala suasana.</p>
+          <span class="harga">Rp 18.000</span>
+          <a href="order.html" class="btn btn-outline">Pesan Sekarang</a>
+        </div>
+        <div class="menu-card">
+          <img src="img/menu-nonkopi3.jpg" alt="Es Lemon Tea">
+          <h3>Es Lemon Tea</h3>
+          <p>Minuman segar dari teh dan lemon yang menyegarkan.</p>
+          <span class="harga">Rp 15.000</span>
+          <a href="order.html" class="btn btn-outline">Pesan Sekarang</a>
+        </div>
+      </div>
+      <a href="order.html?tab=drink" class="btn btn-full">Pesan Minuman</a>
+      <a href="order.html" class="btn btn-full">Pesan Makanan</a>
     </div>
+  </section>
 
-    <div id="toast" class="toast"></div>
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about-image">
+        <img src="img/about-image.jpg" alt="Tentang Kopi Santai">
+      </div>
+      <div class="about-content">
+        <h2>Tentang Kami</h2>
+        <p>Kopi Santai adalah kedai kopi yang didirikan pada tahun 2023 dengan tujuan menyediakan kopi berkualitas tinggi
+          bagi masyarakat. Kami menggunakan biji kopi pilihan yang diolah dengan metode yang tepat untuk menghasilkan
+          cita rasa yang istimewa. Selain kopi, kami juga menyediakan berbagai macam minuman dan makanan ringan lainnya.
+        </p>
+        <p>Kopi Santai bukan hanya sekadar tempat untuk minum kopi, tetapi juga tempat untuk bersantai dan menikmati
+          waktu bersama teman dan keluarga. Kami menyediakan suasana yang nyaman dan pelayanan yang ramah agar setiap
+          pelanggan merasa seperti di rumah sendiri.</p>
+      </div>
+    </div>
+  </section>
 
-    <script src="utils.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Show order history modal
-            const historyModal = document.getElementById('history-modal');
-            const showHistoryBtn = document.getElementById('show-history');
-            const closeBtn = document.querySelector('.close');
-            const historyList = document.getElementById('history-list');
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Kontak Kami</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>Alamat</h3>
+          <p>Jl. Raya Kopi No. 123, Jakarta</p>
+          <h3>Telepon</h3>
+          <p>021-12345678</p>
+          <h3>Email</h3>
+          <p>info@kopisantai.com</p>
+        </div>
+        <div class="contact-form">
+          <h3>Kirim Pesan</h3>
+          <form>
+            <input type="text" placeholder="Nama">
+            <input type="email" placeholder="Email">
+            <textarea placeholder="Pesan"></textarea>
+            <button class="btn btn-primary">Kirim</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            showHistoryBtn.addEventListener('click', function() {
-                // Get order history from localStorage
-                const orderHistory = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-                
-                // Clear previous content
-                historyList.innerHTML = '';
-                
-                if (orderHistory.length === 0) {
-                    historyList.innerHTML = '<p class="text-center">Belum ada riwayat pesanan.</p>';
-                } else {
-                    // Display order history
-                    orderHistory.forEach((order, index) => {
-                        const orderDate = new Date(order.timestamp).toLocaleString('id-ID');
-                        const totalPrice = order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                        
-                        const orderElement = document.createElement('div');
-                        orderElement.className = 'history-item';
-                        
-                        let itemsHtml = '';
-                        order.items.forEach(item => {
-                            itemsHtml += `
-                                <div class="history-item-detail">
-                                    <span>${item.name} x${item.quantity}</span>
-                                    <span>Rp ${formatPrice(item.price * item.quantity)}</span>
-                                </div>
-                            `;
-                        });
-                        
-                        orderElement.innerHTML = `
-                            <div class="history-item-header">
-                                <h4>Pesanan #${orderHistory.length - index}</h4>
-                                <span>${orderDate}</span>
-                            </div>
-                            <div class="history-item-content">
-                                ${itemsHtml}
-                            </div>
-                            <div class="history-item-footer">
-                                <span>Total: Rp ${formatPrice(totalPrice)}</span>
-                                <span>Pembayaran: ${order.paymentMethod}</span>
-                            </div>
-                            <button class="btn btn-sm btn-outline reorder-btn" data-index="${index}">
-                                <i class="fas fa-redo"></i> Pesan Lagi
-                            </button>
-                        `;
-                        
-                        historyList.appendChild(orderElement);
-                    });
-                    
-                    // Add event listeners to reorder buttons
-                    document.querySelectorAll('.reorder-btn').forEach(btn => {
-                        btn.addEventListener('click', function() {
-                            const index = parseInt(this.dataset.index);
-                            const order = orderHistory[index];
-                            
-                            // Set current order to this past order
-                            localStorage.setItem('orderItems', JSON.stringify(order.items));
-                            localStorage.setItem('paymentMethod', order.paymentMethod);
-                            
-                            // Show toast and redirect
-                            showToast('Pesanan ditambahkan ke keranjang!');
-                            setTimeout(() => {
-                                window.location.href = 'order.html';
-                            }, 1000);
-                        });
-                    });
-                }
-                
-                historyModal.style.display = 'block';
-            });
-
-            closeBtn.addEventListener('click', function() {
-                historyModal.style.display = 'none';
-            });
-
-            window.addEventListener('click', function(event) {
-                if (event.target === historyModal) {
-                    historyModal.style.display = 'none';
-                }
-            });
-        });
-    </script>
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Kopi Santai. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
+
 </html>
