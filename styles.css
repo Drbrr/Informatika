@@ -493,7 +493,7 @@ h6 {
 
 .menu-item {
   display: grid;
-  grid-template-columns: 100px 1fr auto;
+  grid-template-columns: 120px 1fr auto;
   gap: 1rem;
   align-items: center;
   padding: 1rem;
@@ -508,8 +508,8 @@ h6 {
 }
 
 .menu-item-image {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 8px;
   background-size: cover;
   background-position: center;
