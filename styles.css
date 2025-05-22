@@ -240,7 +240,7 @@ h6 {
   background-image: url("https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80");
 }
 .drink-1 {
-  background-image: url("https://images.unsplash.com/photo-1576092768241-dec231879fc3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80");
+  background-image: url("https://images.unsplash.com/photo-1499638673689-79a0b5115d87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80");
 }
 .drink-2 {
   background-image: url("https://images.unsplash.com/photo-1600271886742-f049cd451bba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80");
@@ -249,7 +249,7 @@ h6 {
   background-image: url("https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1827&q=80");
 }
 .drink-4 {
-  background-image: url("https://images.unsplash.com/photo-1525385133512-2f3bdd039054?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1885&q=80");
+  background-image: url("https://images.unsplash.com/photo-1572490122747-3968b75cc699?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80");
 }
 .drink-5 {
   background-image: url("https://images.unsplash.com/photo-1548839140-29a749e1cf4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1780&q=80");
@@ -1081,142 +1081,6 @@ h6 {
 
 .close-about:hover {
   color: var(--danger-color);
-}
-
-/* Admin Styles */
-.admin-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem 0;
-}
-
-.admin-card {
-  background-color: var(--card-bg);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  margin-bottom: 2rem;
-  overflow: hidden;
-}
-
-.admin-header {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.admin-header h2 {
-  margin: 0;
-}
-
-.admin-content {
-  padding: 1.5rem;
-}
-
-.admin-tabs {
-  display: flex;
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 1.5rem;
-}
-
-.admin-tab {
-  padding: 1rem 1.5rem;
-  cursor: pointer;
-  font-weight: 600;
-  border-bottom: 3px solid transparent;
-  transition: var(--transition);
-}
-
-.admin-tab.active {
-  border-bottom-color: var(--primary-color);
-  color: var(--primary-color);
-}
-
-.admin-tab-content {
-  display: none;
-}
-
-.admin-tab-content.active {
-  display: block;
-}
-
-.stock-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 1.5rem;
-}
-
-.stock-table th,
-.stock-table td {
-  padding: 0.75rem;
-  text-align: left;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.stock-table th {
-  background-color: var(--background-color);
-  font-weight: 600;
-}
-
-.stock-table tr:hover {
-  background-color: var(--background-color);
-}
-
-.stock-actions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.stock-input {
-  width: 60px;
-  padding: 0.25rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  text-align: center;
-}
-
-.login-form {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: var(--card-bg);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.form-control {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.form-control:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
-}
-
-.low-stock {
-  color: var(--danger-color);
-  font-weight: 600;
-}
-
-.out-of-stock {
-  background-color: rgba(220, 53, 69, 0.1);
 }
 
 /* Responsive Styles */
