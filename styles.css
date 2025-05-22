@@ -994,6 +994,31 @@ h6 {
 }
 
 /* Add Item Button */
+.add-item-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 10;
+  position: relative;
+}
+
+.add-item-btn:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+.add-item-btn:active {
+  transform: scale(0.95);
+}
+
 .add-item {
   background-color: var(--primary-color);
   color: white;
