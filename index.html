@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kantin Digital</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stock-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -74,6 +75,12 @@
                     <a href="order.html" class="btn btn-primary">Lihat Semua Menu</a>
                 </div>
             </section>
+            
+            <section class="admin-link text-center" style="margin-bottom: 2rem;">
+                <a href="admin.html" class="btn btn-outline">
+                    <i class="fas fa-cog"></i> Admin Panel
+                </a>
+            </section>
         </main>
 
         <footer class="footer">
@@ -120,6 +127,7 @@
                         <li>Riwayat pesanan untuk pemesanan ulang dengan cepat</li>
                         <li>Kode promo untuk diskon</li>
                         <li>Cetak struk pesanan</li>
+                        <li>Manajemen stok untuk admin</li>
                     </ul>
                 
                     <h3>Cara Penggunaan</h3>
@@ -167,9 +175,9 @@
             const aboutModal = document.getElementById('about-modal');
             const closeAboutBtn = document.querySelector('.close-about');
             
-            function showAboutModal() {
+            window.showAboutModal = function() {
                 aboutModal.style.display = 'block';
-            }
+            };
             
             closeAboutBtn.addEventListener('click', function() {
                 aboutModal.style.display = 'none';

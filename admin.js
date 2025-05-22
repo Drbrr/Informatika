@@ -1,250 +1,241 @@
+// Admin functionality for Kantin Digital
+
+function getStock() {
+  // Placeholder for getStock function
+  return JSON.parse(localStorage.getItem("menuStock") || '{"food": {}, "drink": {}}')
+}
+
+function showToast(message) {
+  // Placeholder for showToast function
+  alert(message)
+}
+
+function resetStock() {
+  // Placeholder for resetStock function
+  const stock = getStock()
+  for (const category in stock) {
+    for (const id in stock[category]) {
+      stock[category][id].stock = stock[category][id].initialStock
+    }
+  }
+  localStorage.setItem("menuStock", JSON.stringify(stock))
+  location.reload()
+}
+
+function formatPrice(price) {
+  // Placeholder for formatPrice function
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Admin credentials
-  const ADMIN_USERNAME = "admin"
-  const ADMIN_PASSWORD = "admin123"
+  // Load stock data
+  const stock = getStock()
 
-  // DOM elements
-  const loginContainer = document.getElementById("login-container")
-  const adminContainer = document.getElementById("admin-container")
-  const loginBtn = document.getElementById("login-btn")
-  const logoutBtn = document.getElementById("logout-btn")
-  const loginError = document.getElementById("login-error")
-  const adminTabs = document.querySelectorAll(".admin-tab")
-  const adminTabContents = document.querySelectorAll(".admin-tab-content")
+  // Populate food stock table
   const foodStockTable = document.getElementById("food-stock-table").querySelector("tbody")
+  for (const id in stock.food) {
+    const item = stock.food[id]
+    const row = document.createElement("tr")
+    row.innerHTML = `
+      <td>${item.name}</td>
+      <td>${item.initialStock}</td>
+      <td>
+        <input type="number" class="stock-input" 
+               data-id="${id}" 
+               data-category="food" 
+               value="${item.stock}" 
+               min="0" max="${item.initialStock}">
+      </td>
+      <td class="stock-actions">
+        <button class="btn btn-sm btn-outline set-max" data-id="${id}" data-category="food">
+          Max
+        </button>
+        <button class="btn btn-sm btn-outline set-zero" data-id="${id}" data-category="food">
+          Habis
+        </button>
+      </td>
+    `
+    foodStockTable.appendChild(row)
+  }
+
+  // Populate drink stock table
   const drinkStockTable = document.getElementById("drink-stock-table").querySelector("tbody")
-  const adminOrderHistory = document.getElementById("admin-order-history")
-
-  // Check if user is logged in
-  function checkLogin() {
-    const isLoggedIn = localStorage.getItem("adminLoggedIn") === "true"
-    loginContainer.style.display = isLoggedIn ? "none" : "block"
-    adminContainer.style.display = isLoggedIn ? "block" : "none"
-
-    if (isLoggedIn) {
-      loadStockData()
-      loadOrderHistory()
-    }
+  for (const id in stock.drink) {
+    const item = stock.drink[id]
+    const row = document.createElement("tr")
+    row.innerHTML = `
+      <td>${item.name}</td>
+      <td>${item.initialStock}</td>
+      <td>
+        <input type="number" class="stock-input" 
+               data-id="${id}" 
+               data-category="drink" 
+               value="${item.stock}" 
+               min="0" max="${item.initialStock}">
+      </td>
+      <td class="stock-actions">
+        <button class="btn btn-sm btn-outline set-max" data-id="${id}" data-category="drink">
+          Max
+        </button>
+        <button class="btn btn-sm btn-outline set-zero" data-id="${id}" data-category="drink">
+          Habis
+        </button>
+      </td>
+    `
+    drinkStockTable.appendChild(row)
   }
 
-  // Initialize stock data if not exists
-  function initializeStockData() {
-    if (!localStorage.getItem("stockData")) {
-      const stockData = {
-        food: [
-          { id: "1", name: "Nasi Goreng", price: 15000, stock: 20 },
-          { id: "2", name: "Mie Goreng", price: 12000, stock: 15 },
-          { id: "3", name: "Ayam Geprek", price: 10000, stock: 25 },
-          { id: "4", name: "Sate Ayam", price: 20000, stock: 30 },
-          { id: "5", name: "Sate Sapi", price: 22000, stock: 20 },
-        ],
-        drink: [
-          { id: "1", name: "Es Teh", price: 5000, stock: 50 },
-          { id: "2", name: "Es Jeruk", price: 6000, stock: 40 },
-          { id: "3", name: "Susu Coklat", price: 8000, stock: 30 },
-          { id: "4", name: "Susu Vanilla", price: 8000, stock: 25 },
-          { id: "5", name: "Air Mineral", price: 4000, stock: 100 },
-        ],
+  // Set max stock button event
+  document.querySelectorAll(".set-max").forEach((button) => {
+    button.addEventListener("click", function () {
+      const id = this.dataset.id
+      const category = this.dataset.category
+      const input = document.querySelector(`.stock-input[data-id="${id}"][data-category="${category}"]`)
+      const maxValue = stock[category][id].initialStock
+      input.value = maxValue
+    })
+  })
+
+  // Set zero stock button event
+  document.querySelectorAll(".set-zero").forEach((button) => {
+    button.addEventListener("click", function () {
+      const id = this.dataset.id
+      const category = this.dataset.category
+      const input = document.querySelector(`.stock-input[data-id="${id}"][data-category="${category}"]`)
+      input.value = 0
+    })
+  })
+
+  // Save stock changes
+  document.getElementById("save-stock").addEventListener("click", () => {
+    const inputs = document.querySelectorAll(".stock-input")
+    const updatedStock = JSON.parse(JSON.stringify(stock)) // Deep copy
+
+    inputs.forEach((input) => {
+      const id = input.dataset.id
+      const category = input.dataset.category
+      const value = Number.parseInt(input.value)
+
+      if (!isNaN(value) && value >= 0) {
+        updatedStock[category][id].stock = value
       }
-      localStorage.setItem("stockData", JSON.stringify(stockData))
-    }
-  }
-
-  // Load stock data to tables
-  function loadStockData() {
-    const stockData = JSON.parse(localStorage.getItem("stockData"))
-
-    // Clear tables
-    foodStockTable.innerHTML = ""
-    drinkStockTable.innerHTML = ""
-
-    // Populate food stock table
-    stockData.food.forEach((item) => {
-      const row = document.createElement("tr")
-      if (item.stock === 0) {
-        row.classList.add("out-of-stock")
-      }
-
-      row.innerHTML = `
-                <td>${item.name}</td>
-                <td>Rp ${formatPrice(item.price)}</td>
-                <td class="${item.stock < 5 ? "low-stock" : ""}">${item.stock}</td>
-                <td class="stock-actions">
-                    <input type="number" class="stock-input" min="1" value="5">
-                    <button class="btn btn-sm btn-outline restock-btn" data-category="food" data-id="${item.id}">
-                        <i class="fas fa-plus"></i> Restock
-                    </button>
-                </td>
-            `
-      foodStockTable.appendChild(row)
     })
 
-    // Populate drink stock table
-    stockData.drink.forEach((item) => {
-      const row = document.createElement("tr")
-      if (item.stock === 0) {
-        row.classList.add("out-of-stock")
-      }
-
-      row.innerHTML = `
-                <td>${item.name}</td>
-                <td>Rp ${formatPrice(item.price)}</td>
-                <td class="${item.stock < 10 ? "low-stock" : ""}">${item.stock}</td>
-                <td class="stock-actions">
-                    <input type="number" class="stock-input" min="1" value="10">
-                    <button class="btn btn-sm btn-outline restock-btn" data-category="drink" data-id="${item.id}">
-                        <i class="fas fa-plus"></i> Restock
-                    </button>
-                </td>
-            `
-      drinkStockTable.appendChild(row)
-    })
-
-    // Add event listeners to restock buttons
-    document.querySelectorAll(".restock-btn").forEach((button) => {
-      button.addEventListener("click", function () {
-        const category = this.dataset.category
-        const id = this.dataset.id
-        const quantityInput = this.parentElement.querySelector(".stock-input")
-        const quantity = Number.parseInt(quantityInput.value)
-
-        if (quantity > 0) {
-          restockItem(category, id, quantity)
-          showToast(`Berhasil menambah stok ${quantity} item`)
-          loadStockData() // Reload stock data
-        }
-      })
-    })
-  }
-
-  // Restock an item
-  function restockItem(category, id, quantity) {
-    const stockData = JSON.parse(localStorage.getItem("stockData"))
-    const item = stockData[category].find((item) => item.id === id)
-
-    if (item) {
-      item.stock += quantity
-      localStorage.setItem("stockData", JSON.stringify(stockData))
-    }
-  }
-
-  // Load order history
-  function loadOrderHistory() {
-    const orderHistory = JSON.parse(localStorage.getItem("orderHistory") || "[]")
-
-    if (orderHistory.length === 0) {
-      adminOrderHistory.innerHTML = '<p class="text-center">Belum ada riwayat pesanan.</p>'
-      return
-    }
-
-    adminOrderHistory.innerHTML = ""
-
-    // Display order history in reverse chronological order
-    orderHistory.reverse().forEach((order, index) => {
-      const orderDate = new Date(order.timestamp).toLocaleString("id-ID")
-      const subtotal = order.items.reduce((sum, item) => sum + Number.parseInt(item.price) * item.quantity, 0)
-      const totalPrice = subtotal - (order.discountAmount || 0)
-
-      const orderElement = document.createElement("div")
-      orderElement.className = "history-item"
-
-      let itemsHtml = ""
-      order.items.forEach((item) => {
-        itemsHtml += `
-                    <div class="history-item-detail">
-                        <span>${item.name} x${item.quantity}</span>
-                        <span>Rp ${formatPrice(Number.parseInt(item.price) * item.quantity)}</span>
-                    </div>
-                `
-      })
-
-      orderElement.innerHTML = `
-                <div class="history-item-header">
-                    <h4>Pesanan #${index + 1}</h4>
-                    <span>${orderDate}</span>
-                </div>
-                <div class="history-item-content">
-                    ${itemsHtml}
-                </div>
-                <div class="history-item-footer">
-                    <span>Total: Rp ${formatPrice(totalPrice)}</span>
-                    <span>Pembayaran: ${order.paymentMethod}</span>
-                </div>
-            `
-
-      adminOrderHistory.appendChild(orderElement)
-    })
-  }
-
-  // Format price with thousand separators
-  function formatPrice(price) {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-  }
-
-  // Show toast notification
-  function showToast(message, duration = 3000) {
-    const toast = document.getElementById("toast")
-    toast.textContent = message
-    toast.classList.add("show")
-
-    setTimeout(() => {
-      toast.classList.remove("show")
-    }, duration)
-  }
-
-  // Event listeners
-  loginBtn.addEventListener("click", () => {
-    const username = document.getElementById("username").value
-    const password = document.getElementById("password").value
-
-    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-      localStorage.setItem("adminLoggedIn", "true")
-      loginError.style.display = "none"
-      checkLogin()
-    } else {
-      loginError.style.display = "block"
-    }
+    localStorage.setItem("menuStock", JSON.stringify(updatedStock))
+    showToast("Perubahan stok berhasil disimpan!")
   })
 
-  logoutBtn.addEventListener("click", () => {
-    localStorage.removeItem("adminLoggedIn")
-    checkLogin()
-  })
+  // Reset stock button
+  document.getElementById("reset-stock").addEventListener("click", resetStock)
 
-  // Tab switching
-  adminTabs.forEach((tab) => {
-    tab.addEventListener("click", function () {
-      const tabId = this.dataset.tab
+  // Generate sales report
+  generateSalesReport()
 
-      // Remove active class from all tabs and contents
-      adminTabs.forEach((t) => t.classList.remove("active"))
-      adminTabContents.forEach((c) => c.classList.remove("active"))
-
-      // Add active class to clicked tab and corresponding content
-      this.classList.add("active")
-      document.getElementById(`${tabId}-tab`).classList.add("active")
-    })
-  })
-
-  // About Us Modal
-  const aboutModal = document.getElementById("about-modal")
-  const closeAboutBtn = document.querySelector(".close-about")
-
-  window.showAboutModal = () => {
-    aboutModal.style.display = "block"
-  }
-
-  closeAboutBtn.addEventListener("click", () => {
-    aboutModal.style.display = "none"
-  })
-
-  window.addEventListener("click", (event) => {
-    if (event.target === aboutModal) {
-      aboutModal.style.display = "none"
-    }
-  })
-
-  // Initialize
-  initializeStockData()
-  checkLogin()
+  // Export report button
+  document.getElementById("export-report").addEventListener("click", exportSalesReport)
 })
+
+// Generate sales report from order history
+function generateSalesReport() {
+  const orderHistory = JSON.parse(localStorage.getItem("orderHistory") || "[]")
+  const totalOrders = orderHistory.length
+  let totalRevenue = 0
+
+  // Item sales tracking
+  const itemSales = {}
+
+  // Process each order
+  orderHistory.forEach((order) => {
+    const subtotal = order.items.reduce((sum, item) => sum + Number.parseInt(item.price) * item.quantity, 0)
+    const total = subtotal - (order.discountAmount || 0)
+    totalRevenue += total
+
+    // Track item sales
+    order.items.forEach((item) => {
+      const key = `${item.category}-${item.id}`
+      if (!itemSales[key]) {
+        itemSales[key] = {
+          name: item.name,
+          category: item.category,
+          quantity: 0,
+          revenue: 0,
+        }
+      }
+
+      itemSales[key].quantity += item.quantity
+      itemSales[key].revenue += Number.parseInt(item.price) * item.quantity
+    })
+  })
+
+  // Update UI
+  document.getElementById("total-orders").textContent = totalOrders
+  document.getElementById("total-revenue").textContent = `Rp ${formatPrice(totalRevenue)}`
+
+  // Sort items by quantity sold (descending)
+  const sortedItems = Object.values(itemSales).sort((a, b) => b.quantity - a.quantity)
+
+  // Populate popular items table
+  const popularItemsTable = document.getElementById("popular-items-table").querySelector("tbody")
+  popularItemsTable.innerHTML = ""
+
+  if (sortedItems.length === 0) {
+    const row = document.createElement("tr")
+    row.innerHTML = `<td colspan="4" class="text-center">Belum ada data penjualan</td>`
+    popularItemsTable.appendChild(row)
+  } else {
+    sortedItems.forEach((item) => {
+      const row = document.createElement("tr")
+      row.innerHTML = `
+        <td>${item.name}</td>
+        <td>${item.category === "food" ? "Makanan" : "Minuman"}</td>
+        <td>${item.quantity}</td>
+        <td>Rp ${formatPrice(item.revenue)}</td>
+      `
+      popularItemsTable.appendChild(row)
+    })
+  }
+}
+
+// Export sales report as CSV
+function exportSalesReport() {
+  const orderHistory = JSON.parse(localStorage.getItem("orderHistory") || "[]")
+
+  if (orderHistory.length === 0) {
+    showToast("Tidak ada data untuk diekspor")
+    return
+  }
+
+  // Create CSV content
+  let csvContent = "data:text/csv;charset=utf-8,"
+  csvContent += "Tanggal,Item,Kategori,Jumlah,Harga Satuan,Total\n"
+
+  orderHistory.forEach((order) => {
+    const orderDate = new Date(order.timestamp).toLocaleString("id-ID")
+
+    order.items.forEach((item) => {
+      const row = [
+        orderDate,
+        item.name,
+        item.category === "food" ? "Makanan" : "Minuman",
+        item.quantity,
+        `Rp ${formatPrice(item.price)}`,
+        `Rp ${formatPrice(Number.parseInt(item.price) * item.quantity)}`,
+      ]
+
+      csvContent += row.join(",") + "\n"
+    })
+  })
+
+  // Create download link
+  const encodedUri = encodeURI(csvContent)
+  const link = document.createElement("a")
+  link.setAttribute("href", encodedUri)
+  link.setAttribute("download", `laporan_penjualan_${new Date().toISOString().slice(0, 10)}.csv`)
+  document.body.appendChild(link)
+
+  // Trigger download
+  link.click()
+  document.body.removeChild(link)
+
+  showToast("Laporan berhasil diekspor")
+}

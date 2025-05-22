@@ -5,27 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Kantin Digital</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stock-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="login-container" class="container" style="padding-top: 5rem;">
-        <div class="login-form">
-            <h2 class="text-center">Admin Login</h2>
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" class="form-control" placeholder="Enter username">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" placeholder="Enter password">
-            </div>
-            <button id="login-btn" class="btn btn-primary btn-full">Login</button>
-            <p id="login-error" class="text-center" style="color: var(--danger-color); margin-top: 1rem; display: none;">Invalid username or password</p>
-        </div>
-    </div>
-
-    <div id="admin-container" class="app-container" style="display: none;">
+    <div class="app-container">
         <nav class="navbar">
             <div class="container">
                 <a href="index.html" class="navbar-brand">
@@ -33,68 +18,89 @@
                 </a>
                 <div class="navbar-links">
                     <a href="index.html">Beranda</a>
-                    <a href="#" id="logout-btn">Logout</a>
+                    <a href="order.html">Menu</a>
+                    <a href="#" class="active">Admin</a>
                 </div>
             </div>
         </nav>
 
-        <main class="container admin-container">
-            <div class="admin-card">
+        <main class="container">
+            <h1 class="page-title">Admin Panel</h1>
+            
+            <div class="admin-panel">
                 <div class="admin-header">
-                    <h2>Admin Dashboard</h2>
+                    <h2>Manajemen Stok</h2>
+                    <div class="admin-actions">
+                        <button id="reset-stock" class="btn btn-outline">
+                            <i class="fas fa-sync-alt"></i> Reset Stok
+                        </button>
+                        <button id="save-stock" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Simpan Perubahan
+                        </button>
+                    </div>
                 </div>
-                <div class="admin-content">
-                    <div class="admin-tabs">
-                        <div class="admin-tab active" data-tab="stock">Stock Management</div>
-                        <div class="admin-tab" data-tab="orders">Order History</div>
+                
+                <div id="stock-management">
+                    <h3 class="category-title">Makanan</h3>
+                    <table class="stock-table" id="food-stock-table">
+                        <thead>
+                            <tr>
+                                <th>Nama Item</th>
+                                <th>Stok Awal</th>
+                                <th>Stok Tersedia</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Food stock items will be populated here -->
+                        </tbody>
+                    </table>
+                    
+                    <h3 class="category-title">Minuman</h3>
+                    <table class="stock-table" id="drink-stock-table">
+                        <thead>
+                            <tr>
+                                <th>Nama Item</th>
+                                <th>Stok Awal</th>
+                                <th>Stok Tersedia</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Drink stock items will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="admin-panel">
+                <div class="admin-header">
+                    <h2>Laporan Penjualan</h2>
+                    <div class="admin-actions">
+                        <button id="export-report" class="btn btn-outline">
+                            <i class="fas fa-file-export"></i> Export
+                        </button>
                     </div>
-
-                    <div id="stock-tab" class="admin-tab-content active">
-                        <h3>Stock Management</h3>
-                        <p>Manage your inventory levels here. Items with low stock will be highlighted.</p>
-                        
-                        <div class="stock-section">
-                            <h4>Food Items</h4>
-                            <table class="stock-table" id="food-stock-table">
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Price</th>
-                                        <th>Current Stock</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Food stock items will be populated here -->
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="stock-section">
-                            <h4>Drink Items</h4>
-                            <table class="stock-table" id="drink-stock-table">
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Price</th>
-                                        <th>Current Stock</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Drink stock items will be populated here -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div id="orders-tab" class="admin-tab-content">
-                        <h3>Order History</h3>
-                        <p>View all past orders and their details.</p>
-                        <div id="admin-order-history">
-                            <!-- Order history will be populated here -->
-                        </div>
-                    </div>
+                </div>
+                
+                <div id="sales-report">
+                    <p>Total Pesanan: <span id="total-orders">0</span></p>
+                    <p>Total Pendapatan: <span id="total-revenue">Rp 0</span></p>
+                    
+                    <h3 class="category-title">Item Terlaris</h3>
+                    <table class="stock-table" id="popular-items-table">
+                        <thead>
+                            <tr>
+                                <th>Nama Item</th>
+                                <th>Kategori</th>
+                                <th>Jumlah Terjual</th>
+                                <th>Total Pendapatan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Popular items will be populated here -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
@@ -130,16 +136,8 @@
                         <li>Riwayat pesanan untuk pemesanan ulang dengan cepat</li>
                         <li>Kode promo untuk diskon</li>
                         <li>Cetak struk pesanan</li>
+                        <li>Manajemen stok untuk admin</li>
                     </ul>
-                    
-                    <h3>Cara Penggunaan</h3>
-                    <ol>
-                        <li>Pilih menu makanan atau minuman yang diinginkan</li>
-                        <li>Tentukan jumlah yang ingin dipesan</li>
-                        <li>Klik tombol "Tambah" untuk menambahkan ke keranjang</li>
-                        <li>Pilih metode pembayaran yang diinginkan</li>
-                        <li>Klik "Konfirmasi Pesanan" untuk menyelesaikan pemesanan</li>
-                    </ol>
                     
                     <h3>Tentang Pengembang</h3>
                     <p>Aplikasi Kantin Digital ini dikembangkan sebagai solusi untuk mempercepat proses pemesanan makanan dan minuman di kantin. Kami berkomitmen untuk terus mengembangkan aplikasi ini dengan menambahkan fitur-fitur baru yang bermanfaat bagi pengguna.</p>
@@ -155,6 +153,256 @@
     <div id="toast" class="toast"></div>
 
     <script src="utils.js"></script>
-    <script src="admin.js"></script>
+    <script src="stock.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Load stock data
+            const stock = getStock();
+            
+            // Populate food stock table
+            const foodStockTable = document.getElementById("food-stock-table").querySelector("tbody");
+            for (const id in stock.food) {
+                const item = stock.food[id];
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.initialStock}</td>
+                    <td>
+                        <input type="number" class="stock-input" 
+                               data-id="${id}" 
+                               data-category="food" 
+                               value="${item.stock}" 
+                               min="0" max="${item.initialStock}">
+                    </td>
+                    <td class="stock-actions">
+                        <button class="btn btn-sm btn-outline set-max" data-id="${id}" data-category="food">
+                            Max
+                        </button>
+                        <button class="btn btn-sm btn-outline set-zero" data-id="${id}" data-category="food">
+                            Habis
+                        </button>
+                    </td>
+                `;
+                foodStockTable.appendChild(row);
+            }
+            
+            // Populate drink stock table
+            const drinkStockTable = document.getElementById("drink-stock-table").querySelector("tbody");
+            for (const id in stock.drink) {
+                const item = stock.drink[id];
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.initialStock}</td>
+                    <td>
+                        <input type="number" class="stock-input" 
+                               data-id="${id}" 
+                               data-category="drink" 
+                               value="${item.stock}" 
+                               min="0" max="${item.initialStock}">
+                    </td>
+                    <td class="stock-actions">
+                        <button class="btn btn-sm btn-outline set-max" data-id="${id}" data-category="drink">
+                            Max
+                        </button>
+                        <button class="btn btn-sm btn-outline set-zero" data-id="${id}" data-category="drink">
+                            Habis
+                        </button>
+                    </td>
+                `;
+                drinkStockTable.appendChild(row);
+            }
+            
+            // Set max stock button event
+            document.querySelectorAll(".set-max").forEach(button => {
+                button.addEventListener("click", function() {
+                    const id = this.dataset.id;
+                    const category = this.dataset.category;
+                    const input = document.querySelector(`.stock-input[data-id="${id}"][data-category="${category}"]`);
+                    const maxValue = stock[category][id].initialStock;
+                    input.value = maxValue;
+                });
+            });
+            
+            // Set zero stock button event
+            document.querySelectorAll(".set-zero").forEach(button => {
+                button.addEventListener("click", function() {
+                    const id = this.dataset.id;
+                    const category = this.dataset.category;
+                    const input = document.querySelector(`.stock-input[data-id="${id}"][data-category="${category}"]`);
+                    input.value = 0;
+                });
+            });
+            
+            // Save stock changes
+            document.getElementById("save-stock").addEventListener("click", function() {
+                const inputs = document.querySelectorAll(".stock-input");
+                const updatedStock = JSON.parse(JSON.stringify(stock)); // Deep copy
+                
+                inputs.forEach(input => {
+                    const id = input.dataset.id;
+                    const category = input.dataset.category;
+                    const value = parseInt(input.value);
+                    
+                    if (!isNaN(value) && value >= 0) {
+                        updatedStock[category][id].stock = value;
+                    }
+                });
+                
+                localStorage.setItem("menuStock", JSON.stringify(updatedStock));
+                showToast("Perubahan stok berhasil disimpan!");
+            });
+            
+            // Reset stock button
+            document.getElementById("reset-stock").addEventListener("click", resetStock);
+            
+            // Generate sales report
+            generateSalesReport();
+            
+            // Export report button
+            document.getElementById("export-report").addEventListener("click", exportSalesReport);
+            
+            // About Us Modal
+            const aboutModal = document.getElementById('about-modal');
+            const closeAboutBtn = document.querySelector('.close-about');
+            
+            window.showAboutModal = function() {
+                aboutModal.style.display = 'block';
+            };
+            
+            closeAboutBtn.addEventListener('click', function() {
+                aboutModal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === aboutModal) {
+                    aboutModal.style.display = 'none';
+                }
+            });
+        });
+        
+        // Generate sales report from order history
+        function generateSalesReport() {
+            const orderHistory = JSON.parse(localStorage.getItem("orderHistory") || "[]");
+            const totalOrders = orderHistory.length;
+            let totalRevenue = 0;
+            
+            // Item sales tracking
+            const itemSales = {};
+            
+            // Process each order
+            orderHistory.forEach(order => {
+                const subtotal = order.items.reduce(
+                    (sum, item) => sum + Number.parseInt(item.price) * item.quantity, 0
+                );
+                const total = subtotal - (order.discountAmount || 0);
+                totalRevenue += total;
+                
+                // Track item sales
+                order.items.forEach(item => {
+                    const key = `${item.category}-${item.id}`;
+                    if (!itemSales[key]) {
+                        itemSales[key] = {
+                            name: item.name,
+                            category: item.category,
+                            quantity: 0,
+                            revenue: 0
+                        };
+                    }
+                    
+                    itemSales[key].quantity += item.quantity;
+                    itemSales[key].revenue += Number.parseInt(item.price) * item.quantity;
+                });
+            });
+            
+            // Update UI
+            document.getElementById("total-orders").textContent = totalOrders;
+            document.getElementById("total-revenue").textContent = `Rp ${formatPrice(totalRevenue)}`;
+            
+            // Sort items by quantity sold (descending)
+            const sortedItems = Object.values(itemSales).sort((a, b) => b.quantity - a.quantity);
+            
+            // Populate popular items table
+            const popularItemsTable = document.getElementById("popular-items-table").querySelector("tbody");
+            popularItemsTable.innerHTML = "";
+            
+            if (sortedItems.length === 0) {
+                const row = document.createElement("tr");
+                row.innerHTML = `<td colspan="4" class="text-center">Belum ada data penjualan</td>`;
+                popularItemsTable.appendChild(row);
+            } else {
+                sortedItems.forEach(item => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${item.category === 'food' ? 'Makanan' : 'Minuman'}</td>
+                        <td>${item.quantity}</td>
+                        <td>Rp ${formatPrice(item.revenue)}</td>
+                    `;
+                    popularItemsTable.appendChild(row);
+                });
+            }
+        }
+        
+        // Export sales report as CSV
+        function exportSalesReport() {
+            const orderHistory = JSON.parse(localStorage.getItem("orderHistory") || "[]");
+            
+            if (orderHistory.length === 0) {
+                showToast("Tidak ada data untuk diekspor");
+                return;
+            }
+            
+            // Create CSV content
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Tanggal,Item,Kategori,Jumlah,Harga Satuan,Total\n";
+            
+            orderHistory.forEach(order => {
+                const orderDate = new Date(order.timestamp).toLocaleString("id-ID");
+                
+                order.items.forEach(item => {
+                    const row = [
+                        orderDate,
+                        item.name,
+                        item.category === 'food' ? 'Makanan' : 'Minuman',
+                        item.quantity,
+                        `Rp ${formatPrice(item.price)}`,
+                        `Rp ${formatPrice(Number.parseInt(item.price) * item.quantity)}`
+                    ];
+                    
+                    csvContent += row.join(",") + "\n";
+                });
+            });
+            
+            // Create download link
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `laporan_penjualan_${new Date().toISOString().slice(0, 10)}.csv`);
+            document.body.appendChild(link);
+            
+            // Trigger download
+            link.click();
+            document.body.removeChild(link);
+            
+            showToast("Laporan berhasil diekspor");
+        }
+        
+        // Format price with thousand separators
+        function formatPrice(price) {
+            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        
+        // Show toast notification
+        function showToast(message, duration = 3000) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.classList.add("show");
+            
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, duration);
+        }
+    </script>
 </body>
 </html>
