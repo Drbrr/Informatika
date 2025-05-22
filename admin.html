@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Kantin Digital</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="login-container" class="container" style="padding-top: 5rem;">
+        <div class="login-form">
+            <h2 class="text-center">Admin Login</h2>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Enter password">
+            </div>
+            <button id="login-btn" class="btn btn-primary btn-full">Login</button>
+            <p id="login-error" class="text-center" style="color: var(--danger-color); margin-top: 1rem; display: none;">Invalid username or password</p>
+        </div>
+    </div>
+
+    <div id="admin-container" class="app-container" style="display: none;">
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="navbar-brand">
+                    <i class="fas fa-utensils"></i> Kantin Digital
+                </a>
+                <div class="navbar-links">
+                    <a href="index.html">Beranda</a>
+                    <a href="#" id="logout-btn">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+        <main class="container admin-container">
+            <div class="admin-card">
+                <div class="admin-header">
+                    <h2>Admin Dashboard</h2>
+                </div>
+                <div class="admin-content">
+                    <div class="admin-tabs">
+                        <div class="admin-tab active" data-tab="stock">Stock Management</div>
+                        <div class="admin-tab" data-tab="orders">Order History</div>
+                    </div>
+
+                    <div id="stock-tab" class="admin-tab-content active">
+                        <h3>Stock Management</h3>
+                        <p>Manage your inventory levels here. Items with low stock will be highlighted.</p>
+                        
+                        <div class="stock-section">
+                            <h4>Food Items</h4>
+                            <table class="stock-table" id="food-stock-table">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Price</th>
+                                        <th>Current Stock</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Food stock items will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="stock-section">
+                            <h4>Drink Items</h4>
+                            <table class="stock-table" id="drink-stock-table">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Price</th>
+                                        <th>Current Stock</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Drink stock items will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="orders-tab" class="admin-tab-content">
+                        <h3>Order History</h3>
+                        <p>View all past orders and their details.</p>
+                        <div id="admin-order-history">
+                            <!-- Order history will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2024 Kantin Digital. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#" onclick="showAboutModal(); return false;">About Us</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- About Us Modal -->
+    <div id="about-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>About Us</h2>
+                <span class="close-about">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="about-content">
+                    <div class="about-logo">
+                        <i class="fas fa-utensils"></i> Kantin Digital
+                    </div>
+                    <p>Kantin Digital adalah sistem pemesanan makanan dan minuman online yang dirancang untuk memudahkan proses pemesanan di kantin. Aplikasi ini memungkinkan pengguna untuk memesan makanan dan minuman dengan cepat dan mudah tanpa perlu mengantri.</p>
+                
+                    <h3>Fitur Utama</h3>
+                    <ul>
+                        <li>Pemesanan makanan dan minuman secara online</li>
+                        <li>Pembayaran dengan QRIS atau tunai</li>
+                        <li>Riwayat pesanan untuk pemesanan ulang dengan cepat</li>
+                        <li>Kode promo untuk diskon</li>
+                        <li>Cetak struk pesanan</li>
+                    </ul>
+                    
+                    <h3>Cara Penggunaan</h3>
+                    <ol>
+                        <li>Pilih menu makanan atau minuman yang diinginkan</li>
+                        <li>Tentukan jumlah yang ingin dipesan</li>
+                        <li>Klik tombol "Tambah" untuk menambahkan ke keranjang</li>
+                        <li>Pilih metode pembayaran yang diinginkan</li>
+                        <li>Klik "Konfirmasi Pesanan" untuk menyelesaikan pemesanan</li>
+                    </ol>
+                    
+                    <h3>Tentang Pengembang</h3>
+                    <p>Aplikasi Kantin Digital ini dikembangkan sebagai solusi untuk mempercepat proses pemesanan makanan dan minuman di kantin. Kami berkomitmen untuk terus mengembangkan aplikasi ini dengan menambahkan fitur-fitur baru yang bermanfaat bagi pengguna.</p>
+                    
+                    <h3>Hubungi Kami</h3>
+                    <p>Email: support@kantindigital.com</p>
+                    <p>Telepon: (021) 1234-5678</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="utils.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
