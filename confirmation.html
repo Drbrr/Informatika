@@ -83,8 +83,7 @@
             <div class="container">
                 <p>&copy; 2024 Kantin Digital. All rights reserved.</p>
                 <div class="footer-links">
-                    <a href="#">Bantuan</a>
-                    <a href="#">Kontak</a>
+                    <a href="#" onclick="showAboutModal(); return false;">About Us</a>
                 </div>
             </div>
         </footer>
@@ -134,9 +133,64 @@
         </div>
     </div>
 
+    <!-- About Us Modal -->
+    <div id="about-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>About Us</h2>
+                <span class="close-about">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="about-content">
+                    <div class="about-logo">
+                        <i class="fas fa-utensils"></i> Kantin Digital
+                    </div>
+                    <p>Kantin Digital adalah platform pemesanan makanan dan minuman online yang dirancang untuk memberikan pengalaman memesan yang mudah dan cepat.</p>
+                    <p>Didirikan pada tahun 2024, kami berkomitmen untuk menyediakan layanan terbaik dengan menu berkualitas dan harga terjangkau.</p>
+                    
+                    <h3>Visi Kami</h3>
+                    <p>Menjadi platform pemesanan makanan digital terdepan yang mengutamakan kepuasan pelanggan dan kualitas layanan.</p>
+                    
+                    <h3>Misi Kami</h3>
+                    <ul>
+                        <li>Menyediakan berbagai pilihan menu yang lezat dan berkualitas</li>
+                        <li>Memberikan pengalaman pemesanan yang cepat dan mudah</li>
+                        <li>Mengutamakan kepuasan pelanggan dalam setiap aspek layanan</li>
+                    </ul>
+                    
+                    <h3>Hubungi Kami</h3>
+                    <p>Email: info@kantindigital.com</p>
+                    <p>Telepon: (021) 1234-5678</p>
+                    <p>Alamat: Jl. Makanan Enak No. 123, Jakarta</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="toast" class="toast"></div>
 
     <script src="utils.js"></script>
     <script src="confirmation.js"></script>
+    <script>
+        // About Us Modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const aboutModal = document.getElementById('about-modal');
+            const closeAboutBtn = document.querySelector('.close-about');
+            
+            window.showAboutModal = function() {
+                aboutModal.style.display = 'block';
+            };
+            
+            closeAboutBtn.addEventListener('click', function() {
+                aboutModal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === aboutModal) {
+                    aboutModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
