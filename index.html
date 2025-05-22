@@ -66,7 +66,7 @@
                             <h3>Es Jeruk</h3>
                             <p class="menu-price">Rp 6.000</p>
                             <p class="menu-description">Es jeruk segar dengan jeruk pilihan</p>
-                            <a href="order.html" class="btn btn-outline">Pesan Sekarang</a>
+                            <a href="order.html?tab=drink" class="btn btn-outline">Pesan Sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,6 @@
             <div class="container">
                 <p>&copy; 2024 Kantin Digital. All rights reserved.</p>
                 <div class="footer-links">
-                    <a href="#" id="show-history">Riwayat Pesanan</a>
                     <a href="#">Bantuan</a>
                     <a href="#">Kontak</a>
                 </div>
@@ -108,79 +107,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Show order history modal
             const historyModal = document.getElementById('history-modal');
-            const showHistoryBtn = document.getElementById('show-history');
             const closeBtn = document.querySelector('.close');
             const historyList = document.getElementById('history-list');
-
-            showHistoryBtn.addEventListener('click', function() {
-                // Get order history from localStorage
-                const orderHistory = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-                
-                // Clear previous content
-                historyList.innerHTML = '';
-                
-                if (orderHistory.length === 0) {
-                    historyList.innerHTML = '<p class="text-center">Belum ada riwayat pesanan.</p>';
-                } else {
-                    // Display order history
-                    orderHistory.forEach((order, index) => {
-                        const orderDate = new Date(order.timestamp).toLocaleString('id-ID');
-                        const totalPrice = order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                        
-                        const orderElement = document.createElement('div');
-                        orderElement.className = 'history-item';
-                        
-                        let itemsHtml = '';
-                        order.items.forEach(item => {
-                            itemsHtml += `
-                                <div class="history-item-detail">
-                                    <span>${item.name} x${item.quantity}</span>
-                                    <span>Rp ${formatPrice(item.price * item.quantity)}</span>
-                                </div>
-                            `;
-                        });
-                        
-                        orderElement.innerHTML = `
-                            <div class="history-item-header">
-                                <h4>Pesanan #${orderHistory.length - index}</h4>
-                                <span>${orderDate}</span>
-                            </div>
-                            <div class="history-item-content">
-                                ${itemsHtml}
-                            </div>
-                            <div class="history-item-footer">
-                                <span>Total: Rp ${formatPrice(totalPrice)}</span>
-                                <span>Pembayaran: ${order.paymentMethod}</span>
-                            </div>
-                            <button class="btn btn-sm btn-outline reorder-btn" data-index="${index}">
-                                <i class="fas fa-redo"></i> Pesan Lagi
-                            </button>
-                        `;
-                        
-                        historyList.appendChild(orderElement);
-                    });
-                    
-                    // Add event listeners to reorder buttons
-                    document.querySelectorAll('.reorder-btn').forEach(btn => {
-                        btn.addEventListener('click', function() {
-                            const index = parseInt(this.dataset.index);
-                            const order = orderHistory[index];
-                            
-                            // Set current order to this past order
-                            localStorage.setItem('orderItems', JSON.stringify(order.items));
-                            localStorage.setItem('paymentMethod', order.paymentMethod);
-                            
-                            // Show toast and redirect
-                            showToast('Pesanan ditambahkan ke keranjang!');
-                            setTimeout(() => {
-                                window.location.href = 'order.html';
-                            }, 1000);
-                        });
-                    });
-                }
-                
-                historyModal.style.display = 'block';
-            });
 
             closeBtn.addEventListener('click', function() {
                 historyModal.style.display = 'none';

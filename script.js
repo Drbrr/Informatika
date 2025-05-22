@@ -1,6 +1,3 @@
-// Create a new file for the order page JavaScript
-// This will handle the tab switching based on URL parameters
-
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize order data from localStorage or create empty arrays
   let orderItems = JSON.parse(localStorage.getItem("orderItems") || "[]")
@@ -185,6 +182,13 @@ document.addEventListener("DOMContentLoaded", () => {
   confirmOrderBtn.addEventListener("click", () => {
     if (orderItems.length > 0 && paymentMethod) {
       confirmModal.style.display = "block"
+    } else {
+      if (orderItems.length === 0) {
+        showToast("Silakan pilih menu terlebih dahulu!")
+      } else if (!paymentMethod) {
+        showToast("Silakan pilih metode pembayaran!")
+        showTab(2) // Show payment tab
+      }
     }
   })
 
@@ -407,7 +411,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function setupHistoryModal() {
     const historyModal = document.getElementById("history-modal")
     const showHistoryBtn = document.getElementById("show-history")
-    const showHistoryFooterBtn = document.getElementById("show-history-footer")
     const closeBtn = document.querySelector(".close")
     const historyList = document.getElementById("history-list")
 
@@ -486,7 +489,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     showHistoryBtn.addEventListener("click", showHistory)
-    showHistoryFooterBtn.addEventListener("click", showHistory)
 
     closeBtn.addEventListener("click", () => {
       historyModal.style.display = "none"
@@ -500,23 +502,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })
 
+// Format price with thousand separators
 function formatPrice(price) {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
 
+// Show toast notification
 function showToast(message) {
-  const toast = document.createElement("div")
-  toast.classList.add("toast")
+  const toast = document.getElementById("toast")
   toast.textContent = message
-  document.body.appendChild(toast)
+  toast.classList.add("show")
 
   setTimeout(() => {
-    toast.classList.add("show")
-    setTimeout(() => {
-      toast.classList.remove("show")
-      setTimeout(() => {
-        document.body.removeChild(toast)
-      }, 300)
-    }, 2000)
-  }, 100)
+    toast.classList.remove("show")
+  }, 3000)
 }
